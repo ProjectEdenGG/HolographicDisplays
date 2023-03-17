@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package me.filoghost.holographicdisplays.nms.v1_19_R2;
+package me.filoghost.holographicdisplays.nms.v1_19_R3;
 
 class EntityTypeID {
 
