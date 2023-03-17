@@ -3,12 +3,12 @@
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-package me.filoghost.holographicdisplays.nms.v1_19_R2;
+package me.filoghost.holographicdisplays.nms.v1_19_R3;
 
 import me.filoghost.fcommons.Strings;
 import net.minecraft.network.chat.IChatBaseComponent;
-import org.bukkit.craftbukkit.v1_19_R2.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_19_R2.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_19_R3.util.CraftChatMessage;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
