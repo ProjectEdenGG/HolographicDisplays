@@ -113,6 +113,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>holographicdisplays-nms-v1_19_r2</artifactId>
         </dependency>
+             
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>holographicdisplays-nms-v1_19_r3</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.spigotmc</groupId>
