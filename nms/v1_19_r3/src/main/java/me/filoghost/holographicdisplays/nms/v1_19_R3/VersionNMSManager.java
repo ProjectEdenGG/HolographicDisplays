@@ -33,6 +33,7 @@ import net.minecraft.network.protocol.EnumProtocolDirection;
 public class VersionNMSManager implements NMSManager {
 
     private static final ReflectField<AtomicInteger> ENTITY_ID_COUNTER_FIELD = ReflectField.lookup(AtomicInteger.class, Entity.class, "d");
+    private static final ReflectField<NetworkManager> NETWORK_MANAGER_FIELD = ReflectField.lookup(NetworkManager.class, PlayerConnection.class, "h");
     private final Supplier<Integer> entityIDGenerator;
 
     public VersionNMSManager(ErrorCollector errorCollector) {
@@ -97,20 +98,24 @@ public class VersionNMSManager implements NMSManager {
      * which can be avoided by using the event loop. Thanks to ProtocolLib for this insight.
      */
     private void modifyPipeline(Player player, Consumer<ChannelPipeline> pipelineModifierTask) {
-        PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().b;
-        NetworkManager networkManager = new NetworkManager(EnumProtocolDirection.a);
-        Channel channel = networkManager.m;
+        try {
+            PlayerConnection playerConnection = ((CraftPlayer) player).getHandle().b;
+            NetworkManager networkManager = NETWORK_MANAGER_FIELD.get(playerConnection);
+            Channel channel = networkManager.m;
 
-        channel.eventLoop().execute(() -> {
-            if (!player.isOnline()) {
-                return;
-            }
-            try {
-                pipelineModifierTask.accept(channel.pipeline());
-            } catch (Exception e) {
-                Log.warning(NMSErrors.EXCEPTION_MODIFYING_CHANNEL_PIPELINE, e);
-            }
-        });
+            channel.eventLoop().execute(() -> {
+                if (!player.isOnline()) {
+                    return;
+                }
+                try {
+                    pipelineModifierTask.accept(channel.pipeline());
+                } catch (Exception e) {
+                    Log.warning(NMSErrors.EXCEPTION_MODIFYING_CHANNEL_PIPELINE, e);
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
