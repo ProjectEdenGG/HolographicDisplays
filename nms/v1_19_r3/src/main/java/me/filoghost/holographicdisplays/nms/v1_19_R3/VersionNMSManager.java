@@ -32,7 +32,7 @@ import net.minecraft.network.protocol.EnumProtocolDirection;
 
 public class VersionNMSManager implements NMSManager {
 
-    private static final ReflectField<AtomicInteger> ENTITY_ID_COUNTER_FIELD = ReflectField.lookup(AtomicInteger.class, Entity.class, "c");
+    private static final ReflectField<AtomicInteger> ENTITY_ID_COUNTER_FIELD = ReflectField.lookup(AtomicInteger.class, Entity.class, "d");
     private final Supplier<Integer> entityIDGenerator;
 
     public VersionNMSManager(ErrorCollector errorCollector) {
